@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Trees, Waypoints, User, ShieldCheck, Info, TrendingUp, 
   Database, Users, Tag, Armchair, ShoppingCart, Receipt, List as ListIcon, 
-  Key, Crown, Copy, Check, Star, Smartphone, Lock, ShoppingBag, Image as ImageIcon, BarChart3, ChevronDown, CheckCircle2, CopyIcon, Code2, AlertTriangle, Link as LinkIcon
+  Key, Crown, Copy, Check, Star, Smartphone, Lock, ShoppingBag, Image as ImageIcon, BarChart3, ChevronDown, CheckCircle2, CopyIcon, Code2, AlertTriangle, Link as LinkIcon, Layers
 } from 'lucide-react';
 
 // --- Reusable Components ---
@@ -210,11 +210,6 @@ export default function App() {
                   </li>
                 ))}
               </ul>
-              
-              <div className="mt-8 p-4 bg-[#0A0A0A] rounded-lg border border-[#262626] flex gap-3 items-start">
-                <Info className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
-                <p className="text-xs text-[#888] leading-relaxed">Stok otomatis berkurang saat checkout dan status pesanan terpantau secara real-time.</p>
-              </div>
             </motion.div>
 
             {/* Admin Flow */}
@@ -243,11 +238,6 @@ export default function App() {
                   </li>
                 ))}
               </ul>
-
-               <div className="mt-8 p-4 bg-[#0A0A0A] rounded-lg border border-[#262626] flex gap-3 items-start">
-                <TrendingUp className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
-                <p className="text-xs text-[#888] leading-relaxed">Laporan keuangan hanya mengkalkulasi pesanan dengan status 'Success' untuk akurasi data.</p>
-              </div>
             </motion.div>
           </div>
         </section>
@@ -257,6 +247,7 @@ export default function App() {
           <SectionHeading id="database" icon={Database} title="Struktur Database" />
           
           <div className="max-w-4xl">
+            {/* Tabel Users */}
             <AccordionItem title="users" icon={Users} defaultOpen={true}>
               <div className="overflow-x-auto custom-scrollbar pb-2">
                 <table className="w-full text-left border-collapse min-w-[600px]">
@@ -268,71 +259,109 @@ export default function App() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#262626] text-sm">
-                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#C5A059]">id</td><td className="py-3 px-4"><span className="bg-[#0A0A0A] border border-[#262626] px-2 py-1 rounded-sm text-[10px] text-[#888]">BigInt(20) PK</span></td><td className="py-3 px-4 text-[#666]">Auto increment</td></tr>
-                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">name</td><td className="py-3 px-4"><span className="bg-[#0A0A0A] border border-[#262626] px-2 py-1 rounded-sm text-[10px] text-[#888]">Varchar(255)</span></td><td className="py-3 px-4 text-[#666]">Nama lengkap</td></tr>
-                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">email</td><td className="py-3 px-4"><span className="bg-blue-900/20 text-blue-400 border border-blue-900/50 px-2 py-1 rounded-sm text-[10px]">Varchar(255) unique</span></td><td className="py-3 px-4 text-[#666]">Terautentikasi</td></tr>
-                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">role</td><td className="py-3 px-4"><span className="bg-purple-900/20 text-purple-400 border border-purple-900/50 px-2 py-1 rounded-sm text-[10px]">enum</span></td><td className="py-3 px-4 text-[#666]">'customer' atau 'admin'</td></tr>
-                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">address, phone, photo</td><td className="py-3 px-4"><span className="bg-[#0A0A0A] border border-[#262626] px-2 py-1 rounded-sm text-[10px] text-[#888]">mixed nullable</span></td><td className="py-3 px-4 text-[#666]">Profil opsional pelanggan</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#C5A059]">id</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">bigint(20) unsigned PK</td><td className="py-3 px-4 text-[#666]">Primary key, auto increment</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">name</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">varchar(255)</td><td className="py-3 px-4 text-[#666]">Nama lengkap user</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">email</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">varchar(255) unique</td><td className="py-3 px-4 text-[#666]">Email untuk login</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">email_verified_at</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">timestamp nullable</td><td className="py-3 px-4 text-[#666]">Waktu verifikasi email</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">password</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">varchar(255)</td><td className="py-3 px-4 text-[#666]">Hash password</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">role</td><td className="py-3 px-4"><span className="bg-purple-900/20 text-purple-400 border border-purple-900/50 px-2 py-0.5 rounded-sm text-[10px] font-mono">enum</span></td><td className="py-3 px-4 text-[#666]">'customer' atau 'admin'</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">phone</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">varchar(255) nullable</td><td className="py-3 px-4 text-[#666]">Nomor telepon</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">address</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">text nullable</td><td className="py-3 px-4 text-[#666]">Alamat lengkap</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">photo</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">varchar(255) nullable</td><td className="py-3 px-4 text-[#666]">Foto profil</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">remember_token</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">varchar(100)</td><td className="py-3 px-4 text-[#666]">Token remember me</td></tr>
                   </tbody>
                 </table>
               </div>
             </AccordionItem>
 
-            <AccordionItem title="categories & products" icon={Armchair}>
-               <div className="overflow-x-auto custom-scrollbar pb-2">
+            {/* Tabel Categories */}
+            <AccordionItem title="categories" icon={Layers}>
+              <div className="overflow-x-auto custom-scrollbar pb-2">
                 <table className="w-full text-left border-collapse min-w-[600px]">
                   <thead>
                     <tr className="border-b border-[#262626]">
-                      <th className="py-3 px-4 text-[10px] font-semibold text-[#888] uppercase tracking-widest">Kolom (Product)</th>
-                      <th className="py-3 px-4 text-[10px] font-semibold text-[#888] uppercase tracking-widest">Relasi / Tipe</th>
+                      <th className="py-3 px-4 text-[10px] font-semibold text-[#888] uppercase tracking-widest">Kolom</th>
+                      <th className="py-3 px-4 text-[10px] font-semibold text-[#888] uppercase tracking-widest">Tipe</th>
                       <th className="py-3 px-4 text-[10px] font-semibold text-[#888] uppercase tracking-widest">Keterangan</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#262626] text-sm">
-                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#C5A059]">id</td><td className="py-3 px-4"><span className="bg-[#0A0A0A] border border-[#262626] px-2 py-1 rounded-sm text-[10px] text-[#888]">BigInt(20) PK</span></td><td className="py-3 px-4 text-[#666]">Auto increment</td></tr>
-                    <tr className="bg-[#1A1A1A] hover:bg-[#262626] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">category_id</td><td className="py-3 px-4"><span className="bg-[#8A6D3B]/20 text-[#C5A059] border border-[#8A6D3B]/50 px-2 py-1 rounded-sm text-[10px] flex w-fit items-center gap-1"><LinkIcon className="w-3 h-3"/> FK → categories</span></td><td className="py-3 px-4 text-[#666]">Relasi ke tabel categories</td></tr>
-                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">name, slug, desc</td><td className="py-3 px-4"><span className="bg-[#0A0A0A] border border-[#262626] px-2 py-1 rounded-sm text-[10px] text-[#888]">varchar & text</span></td><td className="py-3 px-4 text-[#666]">Info dasar produk</td></tr>
-                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">material, size</td><td className="py-3 px-4"><span className="bg-[#0A0A0A] border border-[#262626] px-2 py-1 rounded-sm text-[10px] text-[#888]">varchar(255)</span></td><td className="py-3 px-4 text-[#666]">Spesifikasi fisik produk</td></tr>
-                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">price, stock</td><td className="py-3 px-4"><span className="bg-[#0A0A0A] border border-[#262626] px-2 py-1 rounded-sm text-[10px] text-[#888]">int(11)</span></td><td className="py-3 px-4 text-[#666]">Harga (Rp) & Stok tersedia</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#C5A059]">id</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">bigint(20) unsigned PK</td><td className="py-3 px-4 text-[#666]">Primary key, auto increment</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">name</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">varchar(255)</td><td className="py-3 px-4 text-[#666]">Nama kategori (contoh: Kursi)</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">slug</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">varchar(255) unique</td><td className="py-3 px-4 text-[#666]">URL friendly</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">description</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">text nullable</td><td className="py-3 px-4 text-[#666]">Deskripsi kategori</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">image</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">varchar(255) nullable</td><td className="py-3 px-4 text-[#666]">Icon atau foto kategori</td></tr>
                   </tbody>
                 </table>
               </div>
             </AccordionItem>
 
-            <AccordionItem title="Transaksi & Relasi" icon={Receipt}>
+            {/* Tabel Products */}
+            <AccordionItem title="products" icon={Armchair}>
+               <div className="overflow-x-auto custom-scrollbar pb-2">
+                <table className="w-full text-left border-collapse min-w-[600px]">
+                  <thead>
+                    <tr className="border-b border-[#262626]">
+                      <th className="py-3 px-4 text-[10px] font-semibold text-[#888] uppercase tracking-widest">Kolom</th>
+                      <th className="py-3 px-4 text-[10px] font-semibold text-[#888] uppercase tracking-widest">Tipe</th>
+                      <th className="py-3 px-4 text-[10px] font-semibold text-[#888] uppercase tracking-widest">Keterangan</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#262626] text-sm">
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#C5A059]">id</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">bigint(20) unsigned PK</td><td className="py-3 px-4 text-[#666]">Auto increment</td></tr>
+                    <tr className="bg-[#1A1A1A]/40"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">category_id</td><td className="py-3 px-4"><span className="bg-[#8A6D3B]/20 text-[#C5A059] border border-[#8A6D3B]/50 px-2 py-0.5 rounded-sm text-[10px] font-mono flex w-fit items-center gap-1 uppercase tracking-tighter"><LinkIcon className="w-2.5 h-2.5"/> bigint(20) FK</span></td><td className="py-3 px-4 text-[#666]">Ke categories.id (Cascade)</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">name, slug</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">varchar(255)</td><td className="py-3 px-4 text-[#666]">Nama & URL slug produk</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">material, size</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">varchar(255)</td><td className="py-3 px-4 text-[#666]">Bahan & Dimensi produk</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">price, stock</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">int(11)</td><td className="py-3 px-4 text-[#666]">Harga (Rp) & Stok tersedia</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">production_process</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">text nullable</td><td className="py-3 px-4 text-[#666]">Informasi proses pembuatan</td></tr>
+                    <tr className="hover:bg-[#1A1A1A] transition-colors"><td className="py-3 px-4 font-mono font-medium text-[#E5E5E5]">is_best_seller</td><td className="py-3 px-4 font-mono text-[11px] text-[#888]">tinyint(1)</td><td className="py-3 px-4 text-[#666]">1 = terlaris, 0 = biasa</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </AccordionItem>
+
+            {/* Tabel Transaksi & Detail */}
+            <AccordionItem title="Transactions & Relasi" icon={Receipt}>
                <div className="grid md:grid-cols-3 gap-6 pt-2">
+                  {/* Carts */}
                   <div className="bg-[#0A0A0A] rounded-xl border border-[#262626] p-5 hover:border-[#C5A059] transition-colors group">
                     <h4 className="font-bold font-mono text-[#E5E5E5] group-hover:text-[#C5A059] mb-3 flex items-center border-b border-[#262626] pb-2 transition-colors"><ShoppingCart className="w-4 h-4 mr-2" /> carts</h4>
-                    <ul className="text-sm space-y-2 text-[#888] font-mono">
-                      <li className="flex justify-between items-center"><span className="text-[#C5A059]">id</span> <span className="text-[10px] bg-[#141414] border border-[#262626] px-1 rounded">PK</span></li>
-                      <li className="flex justify-between items-center"><span className="text-[#E5E5E5]">user_id</span> <span className="text-[10px] bg-blue-900/20 text-blue-400 border border-blue-900/50 px-1 rounded">FK</span></li>
-                      <li className="flex justify-between items-center"><span className="text-[#E5E5E5]">product_id</span> <span className="text-[10px] bg-[#8A6D3B]/20 text-[#C5A059] border border-[#8A6D3B]/50 px-1 rounded">FK</span></li>
-                      <li className="flex justify-between items-center"><span>quantity</span> <span className="text-[10px] bg-[#141414] border border-[#262626] px-1 rounded">int</span></li>
+                    <ul className="text-[11px] space-y-2 text-[#888] font-mono">
+                      <li className="flex justify-between items-center"><span className="text-[#C5A059]">id</span> <span>bigint(20) PK</span></li>
+                      <li className="flex justify-between items-center"><span className="text-[#E5E5E5]">user_id</span> <span className="text-blue-400">bigint(20) FK</span></li>
+                      <li className="flex justify-between items-center"><span className="text-[#E5E5E5]">product_id</span> <span className="text-blue-400">bigint(20) FK</span></li>
+                      <li className="flex justify-between items-center"><span>quantity</span> <span>int(11)</span></li>
                     </ul>
                   </div>
 
+                  {/* Transactions */}
                   <div className="bg-[#0A0A0A] rounded-xl border border-[#C5A059] p-5 relative shadow-[0_0_15px_rgba(197,160,89,0.1)]">
-                    <div className="absolute -top-3 -right-3 bg-[#141414] text-[#C5A059] text-[10px] font-bold px-2 py-1 rounded-full border border-[#C5A059]">Core</div>
+                    <div className="absolute -top-3 -right-3 bg-[#141414] text-[#C5A059] text-[10px] font-bold px-2 py-1 rounded-full border border-[#C5A059]">Main</div>
                     <h4 className="font-bold font-mono text-[#E5E5E5] mb-3 flex items-center border-b border-[#262626] pb-2 text-[#C5A059]"><Receipt className="w-4 h-4 mr-2" /> transactions</h4>
-                     <ul className="text-sm space-y-2 text-[#888] font-mono">
-                      <li className="flex justify-between items-center"><span className="text-[#C5A059]">id</span> <span className="text-[10px] bg-[#141414] border border-[#262626] px-1 rounded">PK</span></li>
-                      <li className="flex justify-between items-center"><span className="text-[#E5E5E5]">user_id</span> <span className="text-[10px] bg-blue-900/20 text-blue-400 border border-blue-900/50 px-1 rounded">FK</span></li>
-                      <li className="flex justify-between items-center"><span>invoice_code</span> <span className="text-[10px] bg-red-900/20 text-red-400 border border-red-900/50 px-1 rounded">unique</span></li>
-                      <li className="flex justify-between items-center"><span>status</span> <span className="text-[10px] bg-purple-900/20 text-purple-400 border border-purple-900/50 px-1 rounded">enum</span></li>
+                     <ul className="text-[11px] space-y-2 text-[#888] font-mono">
+                      <li className="flex justify-between items-center"><span className="text-[#C5A059]">id</span> <span>bigint(20) PK</span></li>
+                      <li className="flex justify-between items-center"><span className="text-[#E5E5E5]">invoice_code</span> <span className="text-red-400">varchar unique</span></li>
+                      <li className="flex justify-between items-center"><span>total_amount</span> <span>int(11)</span></li>
+                      <li className="flex justify-between items-center"><span>status</span> <span className="text-purple-400">enum</span></li>
+                      <li className="flex justify-between items-center"><span>payment_method</span> <span>varchar(255)</span></li>
                     </ul>
                   </div>
 
+                  {/* Transaction Details */}
                   <div className="bg-[#0A0A0A] rounded-xl border border-[#262626] p-5 hover:border-[#C5A059] transition-colors group">
-                    <h4 className="font-bold font-mono text-[#E5E5E5] group-hover:text-[#C5A059] mb-3 flex items-center border-b border-[#262626] pb-2 transition-colors"><ListIcon className="w-4 h-4 mr-2" /> tsx_details</h4>
-                     <ul className="text-sm space-y-2 text-[#888] font-mono">
-                      <li className="flex justify-between items-center"><span className="text-[#C5A059]">id</span> <span className="text-[10px] bg-[#141414] border border-[#262626] px-1 rounded">PK</span></li>
-                      <li className="flex justify-between items-center"><span className="text-[#E5E5E5]">transaction_id</span> <span className="text-[10px] bg-green-900/20 text-green-400 border border-green-900/50 px-1 rounded">FK</span></li>
-                      <li className="flex justify-between items-center"><span className="text-[#E5E5E5]">product_id</span> <span className="text-[10px] bg-[#8A6D3B]/20 text-[#C5A059] border border-[#8A6D3B]/50 px-1 rounded">FK</span></li>
-                      <li className="flex justify-between items-center"><span>subtotal</span> <span className="text-[10px] bg-[#141414] border border-[#262626] px-1 rounded">int</span></li>
+                    <h4 className="font-bold font-mono text-[#E5E5E5] group-hover:text-[#C5A059] mb-3 flex items-center border-b border-[#262626] pb-2 transition-colors"><ListIcon className="w-4 h-4 mr-2" /> transaction_details</h4>
+                     <ul className="text-[11px] space-y-2 text-[#888] font-mono">
+                      <li className="flex justify-between items-center"><span className="text-[#C5A059]">id</span> <span>bigint(20) PK</span></li>
+                      <li className="flex justify-between items-center"><span className="text-[#E5E5E5]">transaction_id</span> <span className="text-blue-400">FK</span></li>
+                      <li className="flex justify-between items-center"><span className="text-[#E5E5E5]">product_id</span> <span className="text-blue-400">FK</span></li>
+                      <li className="flex justify-between items-center"><span>price_subtotal</span> <span>int(11)</span></li>
                     </ul>
                   </div>
                </div>
-               <div className="mt-4 text-xs text-[#666] flex items-center gap-2 px-2"><Info className="w-4 h-4 text-[#C5A059]"/> Diimplementasikan dengan proteksi Delete Cascade.</div>
+               <div className="mt-4 text-xs text-[#666] flex items-center gap-2 px-2 bg-[#0A0A0A] py-3 rounded-lg border border-[#262626]">
+                 <Info className="w-4 h-4 text-[#C5A059]"/> 
+                 <span>Seluruh Foreign Key diimplementasikan dengan <strong>ON DELETE CASCADE</strong> untuk integritas data.</span>
+               </div>
             </AccordionItem>
           </div>
         </section>
@@ -425,7 +454,7 @@ export default function App() {
               { i: Lock, t: "Autentikasi Aman", d: "Sistem login dan registrasi berlapis dengan pemisahan Role akses (Admin vs Customer)." },
               { i: ShoppingBag, t: "Keranjang Belanja", d: "Manajemen keranjang interaktif; ubah jumlah qty atau hapus item tanpa reload." },
               { i: BarChart3, t: "Laporan & Cetak", d: "Rekapitulasi penjualan dengan filter rentang bulan. Mendukung ekspor via Print Browser (PDF)." },
-              { i: ImageIcon, t: "Manajemen Katalog", d: "CRUD produk lengap dengan unggah gambar, spesifikasi bahan, ukuran, dan proses produksi." },
+              { i: ImageIcon, t: "Manajemen Katalog", d: "CRUD produk lengkap dengan unggah gambar, spesifikasi bahan, ukuran, dan proses produksi." },
               { i: TrendingUp, t: "Dashboard Analitik", d: "Ringkasan metrik penting: total pendapatan, volume produk, dan traksi pelanggan terdaftar." }
             ].map((feature, idx) => (
               <motion.div 
@@ -475,22 +504,15 @@ export default function App() {
                     <span className="text-[#666] select-none">3</span>
                     <div className="flex-1">
                       <code className="text-[#C5A059]">cp .env.example .env</code>
-                      <div className="text-[#888] text-[10px] uppercase tracking-widest mt-1 font-sans"># Setup database credentials in .env</div>
                     </div>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity"><CopyButton text="cp .env.example .env" /></div>
                   </div>
                   <div className="flex items-start gap-4 hover:bg-[#1A1A1A] p-2 rounded-lg transition-colors group">
-                    <span className="text-[#666] select-none">5</span>
+                    <span className="text-[#666] select-none">4</span>
                     <div className="flex-1">
                       <code className="text-[#C5A059]">php artisan migrate --seed</code>
-                      <div className="text-[#888] text-[10px] uppercase tracking-widest mt-1 font-sans"># Generates tables, admin account, products & samples</div>
                     </div>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity"><CopyButton text="php artisan migrate --seed" /></div>
-                  </div>
-                  <div className="flex items-start gap-4 hover:bg-[#1A1A1A] p-2 rounded-lg transition-colors group">
-                    <span className="text-[#666] select-none">6</span>
-                    <code className="text-[#C5A059] flex-1">php artisan storage:link</code>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity"><CopyButton text="php artisan storage:link" /></div>
                   </div>
                   <div className="flex items-start gap-4 hover:bg-[#1A1A1A] p-2 rounded-lg transition-colors group border-t border-[#262626] pt-3 mt-3">
                     <span className="text-[#C5A059] select-none">❯</span>
