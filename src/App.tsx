@@ -241,54 +241,7 @@ export default function App() {
             </motion.div>
           </div>
         </section>
-
-        {/* 3. Panduan Penggunaan */}
-        <section className="mb-32">
-          <SectionHeading id="panduan" icon={BookOpen} title="Panduan Penggunaan" />
-          <div className="flex p-1 bg-[#0F0F0F] border border-[#262626] rounded-2xl w-fit mb-10">
-            <button onClick={() => setActiveTab('customer')} className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-[11px] font-bold transition-all ${activeTab === 'customer' ? 'bg-[#C5A059] text-black shadow-lg' : 'text-[#888]'}`}>
-              CUSTOMER
-            </button>
-            <button onClick={() => setActiveTab('admin')} className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-[11px] font-bold transition-all ${activeTab === 'admin' ? 'bg-[#C5A059] text-black shadow-lg' : 'text-[#888]'}`}>
-              ADMIN PORTAL
-            </button>
-          </div>
-
-          <div className="grid lg:grid-cols-12 gap-12 items-start">
-            <div className="lg:col-span-7 space-y-4">
-              <AnimatePresence mode="wait">
-                <motion.div key={activeTab} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }} className="space-y-4">
-                  {(activeTab === 'customer' ? customerSteps : adminSteps).map((step, idx) => (
-                    <div key={idx} className="group bg-[#141414] border border-[#262626] p-5 rounded-2xl flex gap-5 hover:border-[#C5A059]/40 transition-all">
-                      <div className="shrink-0 w-12 h-12 bg-[#0A0A0A] border border-[#262626] rounded-xl flex items-center justify-center text-[#C5A059] group-hover:scale-110 transition-transform"><step.icon className="w-5 h-5" /></div>
-                      <div>
-                        <h4 className="text-[#E5E5E5] font-bold mb-1">{step.title}</h4>
-                        <p className="text-[#888] text-xs leading-relaxed">{step.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-            <div className="lg:col-span-5 bg-gradient-to-br from-[#141414] to-[#0F0F0F] border border-[#C5A059]/20 rounded-3xl p-8 sticky top-32">
-              <h4 className="text-[#C5A059] text-[10px] font-bold uppercase tracking-[0.2em] mb-4">Catatan Penting</h4>
-              <ul className="space-y-4">
-                <li className="flex gap-3 text-xs text-[#888] leading-relaxed">
-                  <div className="w-1.5 h-1.5 bg-[#C5A059] rounded-full mt-1.5 shrink-0"></div>
-                  <span>Laporan keuangan hanya menghitung transaksi dengan status <strong>Success</strong>.</span>
-                </li>
-                <li className="flex gap-3 text-xs text-[#888] leading-relaxed">
-                  <div className="w-1.5 h-1.5 bg-[#C5A059] rounded-full mt-1.5 shrink-0"></div>
-                  <span>Stok produk berkurang otomatis saat checkout berhasil dilakukan oleh customer.</span>
-                </li>
-                <li className="flex gap-3 text-xs text-[#888] leading-relaxed">
-                  <div className="w-1.5 h-1.5 bg-[#C5A059] rounded-full mt-1.5 shrink-0"></div>
-                  <span>Gunakan fitur <strong>Cetak PDF</strong> di menu Laporan untuk arsip fisik mingguan/bulanan.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
+        
 
         {/* Struktur Database */}
         <section className="mb-24">
