@@ -475,7 +475,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* Instlasi */}
+        {/* Panduan Instalasi (Updated) */}
         <section>
            <div className="bg-[#141414] border border-[#262626] rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-2xl">
              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#C5A059]/5 blur-[100px] rounded-full"></div>
@@ -484,41 +484,61 @@ export default function App() {
                <div className="flex items-center gap-4 mb-8">
                  <div className="p-3 bg-[#0A0A0A] text-[#C5A059] border border-[#262626] rounded-2xl"><Code2 className="w-8 h-8" /></div>
                  <div>
-                   <h2 className="font-display text-3xl font-bold text-[#E5E5E5]">Panduan Instalasi</h2>
-                   <p className="text-[#888] text-[10px] tracking-widest uppercase mt-1">Dev Environment Setup</p>
+                   <h2 className="font-display text-3xl font-bold text-[#E5E5E5]">Persiapan Lingkungan</h2>
+                   <p className="text-[#888] text-[10px] tracking-widest uppercase mt-1">Langkah Cepat Menjalankan Aplikasi</p>
                  </div>
                </div>
 
-               <div className="space-y-3 font-mono text-sm max-w-2xl bg-[#0A0A0A] p-6 rounded-2xl border border-[#262626]">
-                  <div className="flex items-start gap-4 hover:bg-[#1A1A1A] p-2 rounded-lg transition-colors group">
-                    <span className="text-[#666] select-none">1</span>
-                    <code className="text-[#C5A059] flex-1">composer install</code>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity"><CopyButton text="composer install" /></div>
-                  </div>
-                  <div className="flex items-start gap-4 hover:bg-[#1A1A1A] p-2 rounded-lg transition-colors group">
-                    <span className="text-[#666] select-none">2</span>
-                    <code className="text-[#C5A059] flex-1">npm install && npm run build</code>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity"><CopyButton text="npm install && npm run build" /></div>
-                  </div>
-                  <div className="flex items-start gap-4 hover:bg-[#1A1A1A] p-2 rounded-lg transition-colors group">
-                    <span className="text-[#666] select-none">3</span>
+               <div className="space-y-4 font-mono text-sm max-w-3xl bg-[#0A0A0A] p-6 rounded-2xl border border-[#262626]">
+                  {/* Langkah 1 */}
+                  <div className="flex items-start gap-4 hover:bg-[#1A1A1A] p-3 rounded-lg transition-colors group">
+                    <span className="text-[#C5A059] font-bold select-none">01</span>
                     <div className="flex-1">
-                      <code className="text-[#C5A059]">cp .env.example .env</code>
+                      <div className="text-[#E5E5E5] mb-1 font-sans font-bold">Database Setup</div>
+                      <p className="text-[#888] text-xs font-sans mb-3">Buat database baru di phpMyAdmin/MySQL dengan nama <code className="text-[#C5A059] bg-[#141414] px-1 rounded">prigeljoyo</code>, lalu import file <code className="text-[#C5A059] bg-[#141414] px-1 rounded">database.sql</code> yang tersedia.</p>
+                      <code className="text-[#C5A059] block bg-[#050505] p-2 rounded border border-[#262626]">CREATE DATABASE prigeljoyo;</code>
                     </div>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity"><CopyButton text="cp .env.example .env" /></div>
                   </div>
-                  <div className="flex items-start gap-4 hover:bg-[#1A1A1A] p-2 rounded-lg transition-colors group">
-                    <span className="text-[#666] select-none">4</span>
+
+                  {/* Langkah 2 */}
+                  <div className="flex items-start gap-4 hover:bg-[#1A1A1A] p-3 rounded-lg transition-colors group border-t border-[#1A1A1A] pt-4">
+                    <span className="text-[#C5A059] font-bold select-none">02</span>
                     <div className="flex-1">
-                      <code className="text-[#C5A059]">php artisan migrate --seed</code>
+                      <div className="text-[#E5E5E5] mb-1 font-sans font-bold">Update Dependensi</div>
+                      <p className="text-[#888] text-xs font-sans mb-3">Pastikan semua library pihak ketiga terinstal atau terupdate ke versi terbaru.</p>
+                      <div className="flex items-center gap-2">
+                        <code className="text-[#C5A059] bg-[#050505] p-2 rounded border border-[#262626] flex-1">composer install && npm install</code>
+                        <CopyButton text="composer install && npm install" />
+                      </div>
                     </div>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity"><CopyButton text="php artisan migrate --seed" /></div>
                   </div>
-                  <div className="flex items-start gap-4 hover:bg-[#1A1A1A] p-2 rounded-lg transition-colors group border-t border-[#262626] pt-3 mt-3">
-                    <span className="text-[#C5A059] select-none">❯</span>
-                    <code className="text-[#C5A059] flex-1 font-bold">php artisan serve</code>
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity"><CopyButton text="php artisan serve" /></div>
+
+                  {/* Langkah 3 */}
+                  <div className="flex items-start gap-4 hover:bg-[#1A1A1A] p-3 rounded-lg transition-colors group border-t border-[#1A1A1A] pt-4">
+                    <span className="text-[#C5A059] font-bold select-none">03</span>
+                    <div className="flex-1">
+                      <div className="text-[#E5E5E5] mb-1 font-sans font-bold">Konfigurasi Environment</div>
+                      <p className="text-[#888] text-xs font-sans mb-3">Sesuaikan file <code className="text-[#C5A059] bg-[#141414] px-1 rounded">.env</code>. Pastikan <code className="text-[#C5A059] bg-[#141414] px-1 rounded">DB_DATABASE=prigeljoyo</code>.</p>
+                      <code className="text-[#C5A059] block bg-[#050505] p-2 rounded border border-[#262626]">cp .env.example .env && php artisan key:generate</code>
+                    </div>
                   </div>
+
+                  {/* Langkah 4 */}
+                  <div className="flex items-start gap-4 bg-[#C5A059]/5 p-4 rounded-xl border border-[#C5A059]/20 group mt-4">
+                    <span className="text-[#C5A059] font-bold select-none">❯</span>
+                    <div className="flex-1">
+                      <div className="text-[#C5A059] mb-1 font-sans font-bold uppercase tracking-widest text-xs">Run Application</div>
+                      <div className="flex items-center gap-2">
+                        <code className="text-[#E5E5E5] font-bold">php artisan serve</code>
+                        <div className="ml-auto"><CopyButton text="php artisan serve" /></div>
+                      </div>
+                    </div>
+                  </div>
+               </div>
+
+               <div className="mt-8 flex items-center gap-3 text-[#888] text-xs font-sans px-2">
+                  <Info className="w-4 h-4 text-[#C5A059]" />
+                  <p>Aplikasi dapat diakses melalui <span className="text-[#C5A059] font-mono">http://127.0.0.1:8000</span> setelah server berjalan.</p>
                </div>
              </div>
            </div>
